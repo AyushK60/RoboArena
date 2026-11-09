@@ -1,4 +1,4 @@
-# RoboArena — Architecture
+# RoboArena - Architecture
 
 ## Principle: logic independent of visuals
 
@@ -36,22 +36,22 @@ docs/                    architecture, algorithms, design notes, test report, sc
 
 ## Data flow
 
-1. **Scenario load** — `buildPreset(id)` (or imported JSON) → `AppStore.loadScenario` →
+1. **Scenario load** - `buildPreset(id)` (or imported JSON) → `AppStore.loadScenario` →
    `Simulation.loadScenario`, validation via `validateScenario`, renderer `setScenario` (static
    art rebuild keyed by `map.revision`).
-2. **Plan** — `store.planMission()` → `createMissionPlan()`:
+2. **Plan** - `store.planMission()` → `createMissionPlan()`:
    `DistanceIndex.ensureScenario` → `allocateTasks` (allocator) → per-robot goal refs →
    `planFleetRobots` (prioritized space-time planning; idle robots receive parking goals first) →
    `PlanResult { plans, idlePlans, failedRobots, taskStates, conflictsAvoided, planningMs }`.
-3. **Commit** — `Simulation.applyPlan` converts plans into a sorted `ScheduledEvent` list
+3. **Commit** - `Simulation.applyPlan` converts plans into a sorted `ScheduledEvent` list
    (mission_start, pickup, trip_complete, mission_complete, replan, planning_failed). History
    events (tick ≤ current) are preserved across replans; already-delivered tasks move into
    `deliveredRecords` so replanning never un-delivers anything.
-4. **Playback** — one rAF loop advances `tickFloat` by `dt × speed`; integer crossings drive
+4. **Playback** - one rAF loop advances `tickFloat` by `dt × speed`; integer crossings drive
    `Simulation.tickForward()`. Every frame the renderer receives `sim.snapshot(...)` +
    `tickFloat` and interpolates robot positions/rotation; React panels re-render on discrete
    version bumps, and two small live hooks refresh clocks/status at ~7 Hz.
-5. **Intervention** — edits allowed in Design mode or while paused in Simulate. Each accepted
+5. **Intervention** - edits allowed in Design mode or while paused in Simulate. Each accepted
    edit bumps `map.revision`, revalidates; `store.replanFromCurrentState()` re-runs allocation +
    space-time planning from robots' current cells at the current tick with `carriedByRobot`
    preserved. Invalid edits roll back (undo stack) with an explanatory toast.
@@ -61,7 +61,7 @@ docs/                    architecture, algorithms, design notes, test report, sc
 - All planner decisions (tie-breaks, expansion order, priority permutations, parking BFS) are
   deterministic; there is no RNG in planning. Seeded RNG is used only for scenario art variation.
 - `performance.now()` appears only inside planning-time **measurements**, never in decisions.
-- Snapshot state (positions, cargo, package states, metrics) is derived from `(plan, tick)` —
+- Snapshot state (positions, cargo, package states, metrics) is derived from `(plan, tick)` -
   pausing, stepping, and replay cannot desynchronize. Verified by the byte-identical replay test
   and in-browser replay comparison.
 

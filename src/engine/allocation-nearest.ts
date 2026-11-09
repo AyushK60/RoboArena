@@ -2,7 +2,7 @@
 // Each robot repeatedly takes its nearest reachable unassigned pickup (true aisle distance),
 // filling its current dock-to-dock trip up to capacity; a full trip is closed (returns to dock)
 // and a new one opens on the next pass. Deterministic: ties break by task id. It deliberately
-// ignores makespan balancing — it exists as a simple, well-defined baseline to compare against
+// ignores makespan balancing - it exists as a simple, well-defined baseline to compare against
 // the insertion strategy. Same dwell assumptions and the same space-time planner afterwards.
 import { PICKUP_DWELL, UNLOAD_DWELL } from './constants';
 import { DistanceIndex, INF } from './pathfinding';
@@ -147,7 +147,7 @@ export function allocateNearestFeasible(ctx: AllocationContext): AllocationResul
       estimatedFinishTicks: ws.finish,
       note:
         ws.trips.length === 0
-          ? 'Left idle — the nearest-feasible baseline assigned no reachable work here.'
+          ? 'Left idle - the nearest-feasible baseline assigned no reachable work here.'
           : `${ws.trips.length} trip(s), ${stops} task(s), estimated finish ${Math.max(0, ws.finish - ctx.startTick)}s of work`,
     };
   });

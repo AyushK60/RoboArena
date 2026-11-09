@@ -1,4 +1,4 @@
-// Deterministic simulation constants — frozen for V1 (see docs/DECISIONS.md)
+// Deterministic simulation constants
 export const TICK_SECONDS = 1.0; // one simulation tick = 1 simulated second
 export const MOVE_TICKS = 1; // ticks to traverse one cell (constant speed, no accel)
 export const PICKUP_DWELL = 3; // ticks spent loading one package

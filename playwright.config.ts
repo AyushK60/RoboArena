@@ -11,8 +11,8 @@ export default defineConfig({
     viewport: { width: 1600, height: 900 },
   },
   webServer: {
-    command: 'npm run dev -- --port 5199 --strictPort',
-    url: 'http://localhost:5199',
+    command: 'npm run dev -- --port 5173 --strictPort',
+    url: 'http://localhost:5173',
     reuseExistingServer: true,
     timeout: 60000,
   },

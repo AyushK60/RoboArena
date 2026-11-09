@@ -5,7 +5,7 @@
 //  - directed edge (from→to, departTick): reserved when leaving `from`; the reverse edge at the
 //    same tick counts as occupied too, which makes head-on swaps impossible.
 // Wait actions are first-class moves. Idle robots and finished robots are "reserved forever".
-// Planning can fail — that is reported, never faked (prioritized planning is incomplete by nature).
+// Planning can fail - that is reported, never faked (prioritized planning is incomplete by nature).
 import { MOVE_TICKS, PICKUP_DWELL, UNLOAD_DWELL, PLANNING_HORIZON, MAX_LEG_EXPANSIONS, PRIORITY_ATTEMPTS } from './constants';
 import { DIRS, isWalkable, manhattan, xOf, yOf } from './grid';
 import { MinHeap } from './pathfinding';
@@ -94,7 +94,7 @@ interface LegPlanResult {
 
 /**
  * Plan a robot through a sequence of goals (pickup/dwell … dock/dwell) with space-time A*.
- * Dwell is range-checked before accepting a goal arrival — the robot only "lands" on a goal if it
+ * Dwell is range-checked before accepting a goal arrival - the robot only "lands" on a goal if it
  * can hold the cell for the whole dwell; otherwise the search keeps looking (e.g. arrive later).
  */
 export function spacetimePlanLegs(
@@ -138,8 +138,8 @@ export function spacetimeAStar(
   maxExpansions: number,
 ): { steps: PathStep[]; endTick: number } | null {
   // The start state may carry the robot's own reservation from the previous leg (its dwell ends
-  // exactly at startTick). No other robot can hold (startCell, startTick) — leg dwell ranges were
-  // range-checked when accepted — so the start state is always exempt from canSit.
+  // exactly at startTick). No other robot can hold (startCell, startTick) - leg dwell ranges were
+  // range-checked when accepted - so the start state is always exempt from canSit.
   if (startCell === goal.cell) {
     let depart = startTick + goal.dwell;
     if (depart <= res.horizon && res.canSitRange(startCell, startTick + 1, depart)) {
@@ -349,7 +349,7 @@ export function planFleetRobots(
         idlePlans.push({ robotId: idle.id, steps: leg.steps });
         res.sitForever(idle.parkCell, leg.endTick);
       } else {
-        // Could not reach a parking spot — hold position (its cell stays blocked; honest).
+        // Could not reach a parking spot - hold position (its cell stays blocked; honest).
         res.parkRobot(idle.cell, startTick);
         idlePlans.push({
           robotId: idle.id,
@@ -399,7 +399,7 @@ export function planFleetRobots(
         else if (ref.kind === 'unload') unloadEvents.push({ tick, taskIds: ref.taskIds, cell: ref.cell, tripIndex: ref.tripIndex });
         else parkTick = tick;
       });
-      // The robot stays at its final cell after the last leg — block it for later-planned robots.
+      // The robot stays at its final cell after the last leg - block it for later-planned robots.
       res.sitForever(planned.endCell, planned.endTick);
       const finishTick = unloadEvents.length ? unloadEvents[unloadEvents.length - 1].tick : planned.endTick;
       for (const s of planned.steps) if (s.wait) conflicts++;

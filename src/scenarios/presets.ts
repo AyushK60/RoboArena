@@ -1,4 +1,4 @@
-// Four distinct warehouse presets. Real serialized objects — every package has a storage cell,
+// Four distinct warehouse presets. Real serialized objects - every package has a storage cell,
 // a walkable pickup service cell, and reachable docks (asserted by tests).
 import { mulberry32 } from '../engine/rng';
 import { CellType, type PackageData, type PackageShape, type RobotData, type Scenario, type ShelfRun, type Truck, type WarehouseMapData, type Zone } from '../engine/types';

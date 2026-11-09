@@ -1,5 +1,5 @@
 // Canvas themes ("Plan Sheet" v1.3).
-//  - light: a printed floor plan — cream paper floor, navy rack outlines, kraft cartons,
+//  - light: a printed floor plan - cream paper floor, navy rack outlines, kraft cartons,
 //           Scout routes in navy and Hauler routes in vermilion (matches the landing schematic).
 //  - dark:  warm graphite concrete with steel racks and cream markings (neutral, not blue).
 // Meaningful colours (amber waits/packages, green success, vermilion restricted zones) exist in both.

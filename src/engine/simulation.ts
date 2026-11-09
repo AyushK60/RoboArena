@@ -1,6 +1,6 @@
 // Deterministic simulation kernel. The mission plan is a precomputed timed schedule; the tick
 // cursor simply advances through it. All state (positions, cargo, metrics) is DERIVED from
-// (plan, tick) — pausing, stepping and replaying cannot desynchronize anything.
+// (plan, tick) - pausing, stepping and replaying cannot desynchronize anything.
 import { CELL_METERS, TICK_SECONDS } from './constants';
 import { xOf } from './grid';
 import type {
@@ -33,9 +33,9 @@ export class Simulation {
   currentTick = 0;
   status: 'idle' | 'ready' | 'running' | 'paused' | 'finished' = 'idle';
   missionCompleteTick: number | null = null;
-  /** Base package states (before this run's events) — reset/replay target. */
+  /** Base package states (before this run's events) - reset/replay target. */
   basePackageStates: Record<string, PackageState> = {};
-  /** Deliveries completed before the last (re)plan — preserved across replans. */
+  /** Deliveries completed before the last (re)plan - preserved across replans. */
   private deliveredRecords: { tick: number; taskIds: string[]; robotId: string }[] = [];
 
   constructor(scenario: Scenario) {
@@ -128,7 +128,7 @@ export class Simulation {
         message:
           plan.failedRobots.length > 0
             ? `Mission finished with unresolved robots: ${plan.failedRobots.map((f) => f.robotId).join(', ')}.`
-            : 'Mission complete — all selected packages delivered and robots back in their bays.',
+            : 'Mission complete - all selected packages delivered and robots back in their bays.',
       });
       this.missionCompleteTick = lastPark;
     } else {

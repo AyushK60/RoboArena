@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.3.0",
   "license": "MIT",
+  "author": "Ayush Khanal <ayush.khanal2060@gmail.com>",
   "description": "RoboArena \u2014 Warehouse Robotics Simulation Studio (local-first, deterministic)",
   "type": "module",
   "scripts": {

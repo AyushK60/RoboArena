@@ -1,4 +1,4 @@
-// Engine barrel — the entire deterministic core, importable without any UI/render code.
+// Engine barrel - the entire deterministic core, importable without any UI/render code.
 export * from './types';
 export * from './constants';
 export * from './rng';

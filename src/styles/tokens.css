@@ -1,8 +1,8 @@
-/* RoboArena — design tokens ("Plan Sheet").
+/* RoboArena - design tokens ("Plan Sheet").
    Colour ratio 60 / 35 / 5:
-     60  paper cream (landing) or deep navy-ink (studio) — the field
-     35  the opposite pole: navy ink on paper, cream ink on navy — text, frames, panels
-      5  signal vermilion — the one highlight: primary action, one italic word, one route
+     60  paper cream (landing) or deep navy-ink (studio) - the field
+     35  the opposite pole: navy ink on paper, cream ink on navy - text, frames, panels
+      5  signal vermilion - the one highlight: primary action, one italic word, one route
    Studio = dark (default). Landing (.lp) = light. .t-dark re-applies the dark set to any block. */
 
 /* ---- Studio, dark: warm graphite (default) ---- */
@@ -108,7 +108,7 @@
   --accent-line: rgb(255 107 61 / 0.55);
   --focus: #ff8560;
 
-  /* Functional state colours — shared with the canvas art, never restyled */
+  /* Functional state colours - shared with the canvas art, never restyled */
   --ok: #34d399;
   --warn: #f5a623;
   --err: #f87171;

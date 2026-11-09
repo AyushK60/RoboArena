@@ -20,7 +20,7 @@ export interface MissionRequest {
 
 /**
  * Parking target for an idle robot: stay put unless it stands on a pickup service cell of a
- * selected task or a dock cell — then move to the nearest free walkable cell that blocks nobody.
+ * selected task or a dock cell - then move to the nearest free walkable cell that blocks nobody.
  */
 function parkingCellFor(
   map: WarehouseMapData,
@@ -102,7 +102,7 @@ export function createMissionPlan(req: MissionRequest): MissionPlanOutcome {
       carriedCount: carried.length > 0 && a.trips[0]?.taskIds.includes(carried[0]) ? carried.length : 0,
     };
     entries.push(entry);
-    // Build refs with pickup/dock cells; carried tasks are "already picked" — no pickup goal,
+    // Build refs with pickup/dock cells; carried tasks are "already picked" - no pickup goal,
     // but the unload still delivers them (full trip cargo).
     const refs: GoalRef[] = [];
     a.trips.forEach((trip, ti) => {

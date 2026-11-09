@@ -1,11 +1,11 @@
-# RoboArena — Algorithm explanations and honest limitations
+# RoboArena - Algorithm explanations and honest limitations
 
 ## 1. Routing: A* on the warehouse graph
 
 - The warehouse is a 4-connected grid of floor/dock (walkable) and rack/obstacle/wall (blocked)
   cells. Robots traverse **aisles only**; a package's pickup happens at an adjacent walkable
   *service cell*, never inside a rack.
-- A* uses the Manhattan heuristic — admissible and consistent for unit-cost orthogonal moves —
+- A* uses the Manhattan heuristic - admissible and consistent for unit-cost orthogonal moves -
   with deterministic neighbor order (N, E, S, W) and FIFO tie-breaking. Unreachable goals return
   an explicit failure; no straight-line fallback exists.
 - The allocator needs pairwise distances among pickups, docks, and robot cells. Uniform costs let
@@ -14,12 +14,12 @@
 
 ## 2. Task allocation: capacity-aware greedy insertion with makespan bidding
 
-**Objective.** Minimize the *predicted makespan* — the time at which the last robot finishes
-(unloads) — not total distance, and not an equal split of tasks.
+**Objective.** Minimize the *predicted makespan* - the time at which the last robot finishes
+(unloads) - not total distance, and not an equal split of tasks.
 
 **Mechanic.** For each unassigned task (stable id order), evaluate inserting it into every robot
-at every feasible (trip, position) — a trip is a dock-to-dock sequence with per-trip capacity
-(S1 ≤ 1, H10 ≤ 10) — plus the option of opening a new trip. Each candidate is scored by the
+at every feasible (trip, position) - a trip is a dock-to-dock sequence with per-trip capacity
+(S1 ≤ 1, H10 ≤ 10) - plus the option of opening a new trip. Each candidate is scored by the
 resulting estimated global makespan:
 
 ```
@@ -34,14 +34,14 @@ order using the same distance metric.
 
 **Observable consequences** (all demonstrated by tests and the UI):
 - The H10 naturally takes multi-package trips (e.g., 11 tasks over 2 trips) while the S1 takes
-  singles (4 tasks over 4 trips) — with *different* tasks in general, since insertion is
+  singles (4 tasks over 4 trips) - with *different* tasks in general, since insertion is
   cost-based rather than a hardcoded split.
 - A robot may remain **idle** when assigning work to it would not reduce the predicted makespan.
 - More selected tasks than total instantaneous capacity still complete via repeat dock trips.
 
 **Honesty.** This is a heuristic. Greedy insertion without backtracking gives no optimality
 guarantee; the UI labels it "heuristic (not proven optimal)". The estimate also ignores
-congestion waits — the space-time planner resolves real conflicts afterwards, which is exactly
+congestion waits - the space-time planner resolves real conflicts afterwards, which is exactly
 why planned vs actual makespan can differ (both are reported separately).
 
 ## 3. Collision avoidance: prioritized space-time A* with reservations
@@ -51,7 +51,7 @@ why planned vs actual makespan can differ (both are reported separately).
 - Robots are planned sequentially in a priority order; each robot's full mission (pickups with
   3-tick dwells, dock unload with 6-tick dwell, between trips) is planned leg-by-leg with
   waits as first-class actions. Dwell ranges are checked before a goal arrival is accepted, so a
-  robot "lands" on a pickup only if it can hold the cell for the whole dwell — otherwise it
+  robot "lands" on a pickup only if it can hold the cell for the whole dwell - otherwise it
   arrives later.
 - **Idle robots make way**: if an idle robot stands on a selected task's pickup service cell or a
   dock cell, it receives a short parking move (highest planning priority) to the nearest cell
@@ -61,10 +61,10 @@ why planned vs actual makespan can differ (both are reported separately).
   and final dock cells are de-duplicated so two robots cannot claim the same finishing cell.
 - **Bounded retries**: deterministic priority orders (identity, reverse, rotations) are retried;
   a robot that fails in every attempt is reported as `planning failed` and its tasks become
-  explicitly unassigned — the rest of the fleet still receives a safe plan. No silent overlap is
+  explicitly unassigned - the rest of the fleet still receives a safe plan. No silent overlap is
   ever permitted.
 - **Known incompleteness** (verified by a dedicated test): two opposing robots in a 1-wide
-  corridor with no passing bay cannot be planned — prioritized planning reports failure. This is
+  corridor with no passing bay cannot be planned - prioritized planning reports failure. This is
   the honest answer; MAPF optimality/completeness is not claimed.
 
 ## 4. Replanning and interventions
@@ -83,7 +83,7 @@ why planned vs actual makespan can differ (both are reported separately).
 
 - **Makespan (actual)** = tick of the last dock unload. **Planned makespan** = the space-time
   plan's final unload tick. Reported separately, never conflated.
-- **Distance** = executed moves × 2 m (1 cell = 2 m, simulated meters — not real-world claims).
+- **Distance** = executed moves × 2 m (1 cell = 2 m, simulated meters - not real-world claims).
 - **Waiting** = ticks spent in planner-inserted wait steps, per robot and fleet-wide.
 - **Planned waits (conflicts avoided)** counts real wait actions the reservation planner inserted
   to resolve would-be conflicts. When the planner needed no waits, the number is honestly 0
@@ -95,5 +95,5 @@ why planned vs actual makespan can differ (both are reported separately).
 
 The `PlanningStrategy` seam (allocation → refs → fleet plan) is designed so V2 can add
 nearest-neighbor, auction/balanced assignment, richer local search, and exact tiny-instance
-baselines, and V3 can add CBS/ECBS and VRP solvers — compared on identical
+baselines, and V3 can add CBS/ECBS and VRP solvers - compared on identical
 map/tasks/seed/fleet. None of these exist in V1; the UI says so explicitly.

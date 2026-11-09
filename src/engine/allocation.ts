@@ -1,8 +1,8 @@
 // V1 task allocation: capacity-aware greedy cheapest-insertion with makespan bidding.
-// This is a documented HEURISTIC — not a global optimum (see docs/ALGORITHM_EXPLANATIONS.md).
+// This is a documented HEURISTIC - not a global optimum (see docs/ALGORITHM_EXPLANATIONS.md).
 //
 // For every unassigned task (processed in stable id order) we evaluate inserting it into every
-// robot at every feasible (trip, position) — including opening a new trip — and pick the option
+// robot at every feasible (trip, position) - including opening a new trip - and pick the option
 // that minimizes the resulting ESTIMATED fleet makespan. Estimates use true aisle distances
 // (BFS fields), pickup dwells and dock unload dwells; congestion waits are NOT estimated
 // (documented limitation; the reservation planner handles conflicts afterwards).
@@ -106,7 +106,7 @@ export function allocateTasks(ctx: AllocationContext): AllocationResult {
     return rs;
   });
 
-  // Robot currently carrying but with NO other task still needs its dock return — keep it.
+  // Robot currently carrying but with NO other task still needs its dock return - keep it.
   const pool = ctx.selectedTaskIds.filter((id) => !carriedSet.has(id)).sort();
   const unassigned: { taskId: string; reason: string }[] = [];
 
@@ -197,7 +197,7 @@ export function allocateTasks(ctx: AllocationContext): AllocationResult {
       estimatedFinishTicks: rs.finish,
       note:
         rs.trips.length === 0
-          ? 'Left idle — assigning work here would not reduce the predicted makespan.'
+          ? 'Left idle - assigning work here would not reduce the predicted makespan.'
           : `${rs.trips.length} trip(s), ${stops} task(s), estimated finish ${Math.max(0, rs.finish - ctx.startTick)}s of work`,
     };
   });

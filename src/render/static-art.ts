@@ -1,5 +1,5 @@
 // Static warehouse art: floor, zones, markings and rack/shelf blocks, drawn once per map
-// revision into a cached RenderTexture. All procedural vector art (see docs/ASSET_CREDITS.md).
+// revision into a cached RenderTexture. All procedural vector art.
 import { Container, Graphics, RenderTexture, Text } from 'pixi.js';
 import { MAP, FONT } from './palette';
 import { mulberry32 } from '../engine/rng';
@@ -112,7 +112,7 @@ function drawShelfCell(g: G, map: WarehouseMapData, cell: number, seed: number, 
   // interior: darker cavity with two shelf rails
   g.rect(px + 0.5, py + 0.5, CELL_PX - 1, CELL_PX - 1).fill({ color: MAP.cavity1 });
   g.rect(px + 1.5, py + 1.5, CELL_PX - 3, CELL_PX - 3).fill({ color: MAP.cavity2 });
-  // horizontal rails (front + back) — steel
+  // horizontal rails (front + back) - steel
   g.rect(px + 1, py + 2, CELL_PX - 2, 2.5).fill({ color: MAP.rackFrame, alpha: 0.75 });
   g.rect(px + 1, py + CELL_PX - 5, CELL_PX - 2, 2.5).fill({ color: MAP.rackFrame, alpha: 0.6 });
   // vertical divider hints
@@ -120,7 +120,7 @@ function drawShelfCell(g: G, map: WarehouseMapData, cell: number, seed: number, 
   // slot floor sheen
   g.rect(px + 3, py + 6, CELL_PX - 6, 4).fill({ color: MAP.sheen, alpha: 0.8 });
   if (bulk) {
-    // bulk background stock: muted, uniform cartons — clearly not mission inventory
+    // bulk background stock: muted, uniform cartons - clearly not mission inventory
     for (let i = 0; i < 2; i++) {
       for (let j = 0; j < 2; j++) {
         if (rnd() > 0.9) continue;

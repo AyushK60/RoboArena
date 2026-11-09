@@ -1,6 +1,6 @@
 @import './tokens.css';
 
-/* RoboArena — "Floor Marking". Tokens live in tokens.css; this file only consumes them.
+/* RoboArena - "Floor Marking". Tokens live in tokens.css; this file only consumes them.
    Exceptions: robot/legend swatches in App.tsx mirror canvas art colours. */
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -368,7 +368,7 @@ b { font-weight: 600; }
 ::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 5px; border: 2px solid transparent; background-clip: padding-box; }
 ::-webkit-scrollbar-track { background: transparent; }
 
-/* ============================ landing — "plan sheet" ============================ */
+/* ============================ landing - "plan sheet" ============================ */
 .lp {
   position: fixed; inset: 0; z-index: 40;
   background: var(--bg); color: var(--ink);

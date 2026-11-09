@@ -1,4 +1,4 @@
-// Seeded RNG — mulberry32. All "randomness" in scenarios/art is seeded and reproducible.
+// Seeded RNG - mulberry32. All "randomness" in scenarios/art is seeded and reproducible.
 export function mulberry32(seed: number): () => number {
   let a = seed >>> 0;
   return function () {

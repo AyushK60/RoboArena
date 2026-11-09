@@ -274,7 +274,7 @@ export class WarehouseRenderer {
       for (const [id, sprite] of this.robotSprites) {
         if (!seen.has(id)) sprite.visible = false;
       }
-      // package states — carried/delivered leave the slot; pickup animates the slide
+      // package states - carried/delivered leave the slot; pickup animates the slide
       const slide = this.pickupSlideInfo(snap, this.tickFloat);
       for (const [id, state] of Object.entries(snap.packageStates)) {
         const sprite = this.pkgSprites.get(id);
@@ -358,7 +358,7 @@ export class WarehouseRenderer {
       const rt = snap.robots.find((r) => r.id === rp.robotId)?.type;
       const isFocus = this.selectedRobotId === null || this.selectedRobotId === rp.robotId;
       const color = robotColor(rp.robotId, rt);
-      // focus mode: the selected robot's route at full strength, others subdued — no spaghetti
+      // focus mode: the selected robot's route at full strength, others subdued - no spaghetti
       const prevAlpha = g.alpha;
       g.alpha = isFocus ? 1 : 0.22;
       drawRoute(g, rp.steps, this.mapW, color, 0, tick);
@@ -378,7 +378,7 @@ export class WarehouseRenderer {
       }
       g.alpha = prevAlpha;
     }
-    // trails (actual traveled path) — solid faint line
+    // trails (actual traveled path) - solid faint line
     for (const rv of snap.robots) {
       const rp = this.plan.plans.find((p) => p.robotId === rv.id);
       if (!rp || rv.moveFraction === 0) continue;
@@ -539,7 +539,7 @@ export class WarehouseRenderer {
     g.rect(hx + 1, hy + 1, CELL_PX - 2, CELL_PX - 2).stroke({ width: 1.5, color: ok ? 0x2dd4bf : 0xf87171, alpha: 0.85 });
   }
 
-  /** Small hover tooltip drawn in screen space — no React involvement per pointer-move. */
+  /** Small hover tooltip drawn in screen space - no React involvement per pointer-move. */
   private drawTooltip(): void {
     const existing = this.screenOverlay.getChildByName('tooltip');
     if (existing) existing.destroy({ children: true });

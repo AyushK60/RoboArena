@@ -166,14 +166,14 @@ export class AppStore {
   } | null = null;
   private guidedTimer = 0;
 
-  /** Guided stages advance on ACTUAL state — a stage that never occurs is skipped honestly. */
+  /** Guided stages advance on ACTUAL state - a stage that never occurs is skipped honestly. */
   startGuidedDemo(): void {
     this.mode = 'simulate';
     this.selectSampleMission(15);
     this.guidedStep = 0;
     this.planMission();
     this.play();
-    this.toast('info', 'Guided mission started — follow the steps in the guide panel.');
+    this.toast('info', 'Guided mission started - follow the steps in the guide panel.');
     this.stopGuidedWatcher();
     this.guidedTimer = window.setInterval(() => this.guidedCheck(), 350);
     this.notify();
@@ -298,14 +298,14 @@ export class AppStore {
 
   loadPreset(id: string): void {
     if (!this.presetList.some((p) => p.id === id)) {
-      this.toast('error', `Unknown warehouse "${id}" — previous warehouse kept.`);
+      this.toast('error', `Unknown warehouse "${id}" - previous warehouse kept.`);
       this.notify();
       return;
     }
     const sc = buildPreset(id);
     this.activePresetId = id;
     this.loadScenario(sc);
-    this.toast('info', `Loaded ${sc.map.name} — ${sc.packages.length} packages, ${sc.robots.length} robots.`);
+    this.toast('info', `Loaded ${sc.map.name} - ${sc.packages.length} packages, ${sc.robots.length} robots.`);
   }
 
   loadScenario(sc: Scenario): void {
@@ -404,7 +404,7 @@ export class AppStore {
       fleet: fleetIds.length,
       rows,
     };
-    this.toast('success', 'Comparison complete — same scenario, selection and fleet for both strategies.');
+    this.toast('success', 'Comparison complete - same scenario, selection and fleet for both strategies.');
     this.notify();
   }
 
@@ -524,7 +524,7 @@ export class AppStore {
         : undefined;
       void alloc;
     }
-    // trips come from the allocator's assignments — recover from planner outcome notes? Use plan refs:
+    // trips come from the allocator's assignments - recover from planner outcome notes? Use plan refs:
     for (const rp of outcome.plan.plans) {
       const trips: { taskIds: string[]; dockCell: number }[] = [];
       for (const ue of rp.unloadEvents) trips.push({ taskIds: ue.taskIds, dockCell: ue.cell });
@@ -552,7 +552,7 @@ export class AppStore {
       return;
     }
     if (this.isPlanStale()) {
-      this.toast('warn', 'Plan needs updating — recompute before running.');
+      this.toast('warn', 'Plan needs updating - recompute before running.');
       this.notify();
       return;
     }
@@ -570,7 +570,7 @@ export class AppStore {
 
   step(n = 1): void {
     if (this.isPlanStale()) {
-      this.toast('warn', 'Plan needs updating — recompute before stepping.');
+      this.toast('warn', 'Plan needs updating - recompute before stepping.');
       this.notify();
       return;
     }
@@ -640,10 +640,10 @@ export class AppStore {
     this.notify();
     const m = this.sim.snapshot(this.selectedTaskIds.size).metrics;
     if (m.delivered >= this.selectedTaskIds.size) {
-      this.toast('success', `Mission complete — ${m.delivered} packages delivered in ${formatClock(m.actualMakespanTicks ?? this.sim.currentTick)}.`);
+      this.toast('success', `Mission complete - ${m.delivered} packages delivered in ${formatClock(m.actualMakespanTicks ?? this.sim.currentTick)}.`);
       if (this.guidedStep >= 0) this.guidedStep = 6;
     } else {
-      this.toast('warn', `Mission ended: ${m.delivered}/${this.selectedTaskIds.size} delivered. Some tasks failed planning — see Analyze.`);
+      this.toast('warn', `Mission ended: ${m.delivered}/${this.selectedTaskIds.size} delivered. Some tasks failed planning - see Analyze.`);
     }
   }
 
@@ -880,7 +880,7 @@ export class AppStore {
       else if (this.tool === 'package') this.addPackage(cell);
       else if (this.tool === 'move' && pkg) {
         this.movingPackageId = pkg.id;
-        this.toast('info', `Moving ${pkg.id} — click a target storage cell.`);
+        this.toast('info', `Moving ${pkg.id} - click a target storage cell.`);
         this.notify();
       } else if (this.tool === 'move' && this.movingPackageId) {
         const id = this.movingPackageId;
@@ -929,7 +929,7 @@ export class AppStore {
     const c = this.listCustoms().find((x) => x.id === id);
     if (!c) {
       this.activePresetId = this.activePresetId.startsWith('custom:') ? 'ecommerce' : this.activePresetId;
-      this.toast('error', `Saved layout "${id}" was not found — previous warehouse kept.`);
+      this.toast('error', `Saved layout "${id}" was not found - previous warehouse kept.`);
       this.notify();
       return;
     }
@@ -966,7 +966,7 @@ export class AppStore {
       scenarioId: this.scenario.id,
       strategy: this.planSummary?.strategyName,
       planningMs: this.planSummary?.planningMs,
-      seedNote: 'deterministic replay — same scenario+selection+fleet produce identical results',
+      seedNote: 'deterministic replay - same scenario+selection+fleet produce identical results',
       scenario: scenarioToJson(this.scenario),
       selection: { tasks: [...this.selectedTaskIds], robots: [...this.selectedRobotIds] },
       events: snap.events,
@@ -1005,7 +1005,7 @@ export const GUIDED_STAGES: GuidedStage[] = [
     text: (s) =>
       `We picked ${s.selectedTaskIds.size} of ${s.scenario.packages.length} packages and activated ${s.selectedRobotIds.size} robots: ` +
       [...s.selectedRobotIds].map((id) => `${id} (${s.scenario.robots.find((r) => r.id === id)?.type === 'H10' ? 'Hauler, 10 per trip' : 'Scout, 1 per trip'})`).join(' and ') +
-      '. Watch how the planner decides who carries what — then pause anytime to inspect.',
+      '. Watch how the planner decides who carries what - then pause anytime to inspect.',
   },
   {
     id: 'assignment',
@@ -1013,7 +1013,7 @@ export const GUIDED_STAGES: GuidedStage[] = [
     auto: true,
     text: (s) => {
       const parts = Object.entries(s.planSummary?.tripsByRobot ?? {}).map(([id, trips]) => `${id}: ${trips.length} trip${trips.length > 1 ? 's' : ''}, ${trips.reduce((n, t) => n + t.taskIds.length, 0)} tasks`);
-      return `The planner tested "give this task to that robot" for every option and kept the lowest predicted finish time. Result: ${parts.join('; ')}. It is a fast heuristic — not a proven optimum.`;
+      return `The planner tested "give this task to that robot" for every option and kept the lowest predicted finish time. Result: ${parts.join('; ')}. It is a fast heuristic - not a proven optimum.`;
     },
   },
   {
@@ -1026,13 +1026,13 @@ export const GUIDED_STAGES: GuidedStage[] = [
     id: 'pickup',
     title: 'First pickup',
     auto: true,
-    text: () => 'At the shelf slot, a robot pauses for its load dwell: the package slides out of the rack and onto the robot — the slot visibly empties. A Hauler can collect up to ten before heading back.',
+    text: () => 'At the shelf slot, a robot pauses for its load dwell: the package slides out of the rack and onto the robot - the slot visibly empties. A Hauler can collect up to ten before heading back.',
   },
   {
     id: 'delivery',
     title: 'Unloading at the dock',
     auto: true,
-    text: () => 'A trip only completes when cargo is unloaded at the dock — delivered crates stack up at the station and the counter advances. Only then does the job count.',
+    text: () => 'A trip only completes when cargo is unloaded at the dock - delivered crates stack up at the station and the counter advances. Only then does the job count.',
   },
   {
     id: 'avoidance',
@@ -1042,9 +1042,9 @@ export const GUIDED_STAGES: GuidedStage[] = [
       const n = s.planSummary ? s.planSummary.conflictsAvoided ?? 0 : 0;
       const waits = s.sim.snapshot(s.selectedTaskIds.size).metrics.conflictsAvoided;
       if (n === 0 && waits === 0) {
-        return 'No conflicts occurred on this run — the reservation planner booked every cell ahead of time. Amber pause markers would appear on the route if a robot had to wait its turn.';
+        return 'No conflicts occurred on this run - the reservation planner booked every cell ahead of time. Amber pause markers would appear on the route if a robot had to wait its turn.';
       }
-      return `The planner inserted ${Math.max(n, waits)} wait(s) where two routes would have crossed. Look for the amber pause markers — robots hold position instead of colliding.`;
+      return `The planner inserted ${Math.max(n, waits)} wait(s) where two routes would have crossed. Look for the amber pause markers - robots hold position instead of colliding.`;
     },
   },
   {
@@ -1059,7 +1059,7 @@ export const GUIDED_STAGES: GuidedStage[] = [
     auto: false,
     text: (s) => {
       const m = s.sim.snapshot(s.selectedTaskIds.size).metrics;
-      return `Delivered ${m.delivered}/${m.selected} packages in ${formatClock(m.actualMakespanTicks ?? 0)} (planned ${m.plannedMakespanTicks !== null ? formatClock(m.plannedMakespanTicks) : '—'}), ${m.distanceMeters.toFixed(0)} m travelled, ${m.trips} dock trips, ${m.conflictsAvoided} planned waits. Replay with Reset to see the identical run again.`;
+      return `Delivered ${m.delivered}/${m.selected} packages in ${formatClock(m.actualMakespanTicks ?? 0)} (planned ${m.plannedMakespanTicks !== null ? formatClock(m.plannedMakespanTicks) : '-'}), ${m.distanceMeters.toFixed(0)} m travelled, ${m.trips} dock trips, ${m.conflictsAvoided} planned waits. Replay with Reset to see the identical run again.`;
     },
   },
 ];

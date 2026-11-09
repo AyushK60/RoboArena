@@ -19,7 +19,7 @@ function useStoreVersion(): number {
   return useSyncExternalStore(store.subscribe, store.getSnapshot);
 }
 
-/** Re-render at ~7 Hz — for panels that show continuously-changing sim state. */
+/** Re-render at ~7 Hz - for panels that show continuously-changing sim state. */
 function useLiveTick(): void {
   const [, force] = useState(0);
   useEffect(() => {
@@ -144,7 +144,7 @@ function TopBar({ onTogglePanel }: { onTogglePanel: (side: 'left' | 'right') => 
           aria-label="Warehouse preset"
         >
           {store.presetList.map((p) => (
-            <option key={p.id} value={p.id}>{p.name} — {p.subtitle}</option>
+            <option key={p.id} value={p.id}>{p.name} - {p.subtitle}</option>
           ))}
           {store.listCustoms().map((c) => (
             <option key={c.id} value={`custom:${c.id}`}>{c.name} (saved)</option>
@@ -185,7 +185,7 @@ function TopBar({ onTogglePanel }: { onTogglePanel: (side: 'left' | 'right') => 
 }
 
 // ---------------------------------------------------------------- Canvas
-// One renderer per page lifetime — React StrictMode remounts must not create a second
+// One renderer per page lifetime - React StrictMode remounts must not create a second
 // PixiJS application on the same canvas.
 let rendererSingleton: WarehouseRenderer | null = null;
 
@@ -307,7 +307,7 @@ function DesignTools() {
       </Section>
       <Section title="Validation">
         {errors.length === 0 && warns.length === 0 && (
-          <div className="status ok"><IconCheck /> Map valid — mission ready</div>
+          <div className="status ok"><IconCheck /> Map valid - mission ready</div>
         )}
         {errors.map((v, i) => <div key={i} className="status err"><IconAlert /> {v.message}</div>)}
         {warns.map((v, i) => <div key={i} className="status warn"><IconAlert /> {v.message}</div>)}
@@ -405,7 +405,7 @@ function SimulateTools() {
           </button>
         </div>
         {!paused && <p className="hint warn-hint">Pause the simulation to edit safely. Edits validate and replan from current positions.</p>}
-        {paused && store.planOutcome && <p className="hint">Tools armed — map edits will validate, then replan remaining tasks.</p>}
+        {paused && store.planOutcome && <p className="hint">Tools armed - map edits will validate, then replan remaining tasks.</p>}
       </Section>
       <Section title="Fleet status">
         {snap.robots.map((r) => (
@@ -430,7 +430,7 @@ function AnalyzeSide() {
       </Section>
       <Section title="About the data">
         <p className="hint">
-          All numbers come from the deterministic engine — the same scenario, selection and fleet
+          All numbers come from the deterministic engine - the same scenario, selection and fleet
           always replay identically. Distances are simulated meters (1 cell = {CELL_METERS} m);
           planning time is real CPU time on this machine.
         </p>
@@ -483,9 +483,9 @@ function ComparePanel() {
             {([
               ['Delivered', (r) => `${r.delivered}/${r.selected}`],
               ['Failed robots', (r) => String(r.failed)],
-              ['Actual makespan', (r) => (r.actualMakespan !== null ? formatClock(r.actualMakespan) : '—')],
-              ['Planned makespan', (r) => (r.plannedMakespan !== null ? formatClock(r.plannedMakespan) : '—')],
-              ['Last park', (r) => (r.lastParked !== null ? formatClock(r.lastParked) : '—')],
+              ['Actual makespan', (r) => (r.actualMakespan !== null ? formatClock(r.actualMakespan) : '-')],
+              ['Planned makespan', (r) => (r.plannedMakespan !== null ? formatClock(r.plannedMakespan) : '-')],
+              ['Last park', (r) => (r.lastParked !== null ? formatClock(r.lastParked) : '-')],
               ['Distance', (r) => `${r.distanceMeters.toFixed(0)} m`],
               ['Dock trips', (r) => String(r.trips)],
               ['Planned waits', (r) => String(r.conflicts)],
@@ -505,7 +505,7 @@ function ComparePanel() {
                 <span className="dim mono">{pr.id}</span>
                 {rows.map((r) => (
                   <span key={r.key} className="mono">
-                    {r.perRobot[i] ? `${r.perRobot[i].delivered} delivered · ${r.perRobot[i].trips} trips` : '—'}
+                    {r.perRobot[i] ? `${r.perRobot[i].delivered} delivered · ${r.perRobot[i].trips} trips` : '-'}
                   </span>
                 ))}
               </div>
@@ -513,7 +513,7 @@ function ComparePanel() {
           </div>
         )}
         {cmp && !sameScenario && (
-          <p className="hint warn-hint">This comparison is from a different scenario or selection — run it again.</p>
+          <p className="hint warn-hint">This comparison is from a different scenario or selection - run it again.</p>
         )}
         <p className="hint">
           Both strategies are heuristics. Neither is globally optimal; a better measured makespan on
@@ -581,7 +581,7 @@ function MissionPlanner() {
                   {trips.map((t, i) => (
                     <div key={i} className="trip-row">
                       <span className="trip-n">T{i + 1}</span>
-                      <span>{t.taskIds.map((x) => x.replace('P-', '')).join(' → ') || '—'} → dock</span>
+                      <span>{t.taskIds.map((x) => x.replace('P-', '')).join(' → ') || '-'} → dock</span>
                     </div>
                   ))}
                 </div>
@@ -593,7 +593,7 @@ function MissionPlanner() {
             ))}
             <h4 className="sub-head">Planning Algorithm</h4>
             <div className="algo-card selected">
-              <span className="radio on" /> <div><b>{summary.strategyName}</b><div className="dim">deterministic heuristic — not proven optimal</div></div>
+              <span className="radio on" /> <div><b>{summary.strategyName}</b><div className="dim">deterministic heuristic - not proven optimal</div></div>
             </div>
             <p className="hint">Estimated makespan <b>{formatClock(summary.estimatedMakespanTicks)}</b> · planning took {summary.planningMs.toFixed(0)} ms.</p>
           </>
@@ -665,7 +665,7 @@ function PackagePicker({ selectedIds, snap }: { selectedIds: Set<string>; snap: 
             </button>
           );
         })}
-        {matches.length > 60 && <div className="dim more">+ {matches.length - 60} more — refine the search</div>}
+        {matches.length > 60 && <div className="dim more">+ {matches.length - 60} more - refine the search</div>}
         {matches.length === 0 && <div className="dim more">No packages match.</div>}
       </div>
       {mode === 'all' && (
@@ -693,8 +693,8 @@ function AnalyzePanel() {
       <div className="panel-body">
         <div className="kpi-grid">
           <div className="kpi-card"><span>Delivered</span><b>{m.delivered} / {m.selected}</b></div>
-          <div className="kpi-card"><span>Actual makespan</span><b>{m.actualMakespanTicks !== null ? formatClock(m.actualMakespanTicks) : '—'}</b></div>
-          <div className="kpi-card"><span>Planned makespan</span><b>{m.plannedMakespanTicks !== null ? formatClock(m.plannedMakespanTicks) : '—'}</b></div>
+          <div className="kpi-card"><span>Actual makespan</span><b>{m.actualMakespanTicks !== null ? formatClock(m.actualMakespanTicks) : '-'}</b></div>
+          <div className="kpi-card"><span>Planned makespan</span><b>{m.plannedMakespanTicks !== null ? formatClock(m.plannedMakespanTicks) : '-'}</b></div>
           <div className="kpi-card"><span>Distance travelled</span><b>{m.distanceMeters.toFixed(0)} m</b></div>
           <div className="kpi-card"><span>Waiting (ticks)</span><b>{m.waitTicks}</b></div>
           <div className="kpi-card"><span>Planned waits (conflicts avoided)</span><b>{m.conflictsAvoided}</b></div>
@@ -719,11 +719,11 @@ function AnalyzePanel() {
               <span>{e.message}</span>
             </div>
           ))}
-          {snap.events.length === 0 && <p className="hint">No events yet — run a mission.</p>}
+          {snap.events.length === 0 && <p className="hint">No events yet - run a mission.</p>}
         </div>
         <p className="hint">
           Planned vs actual makespan differ because the estimator ignores congestion waits; the
-          space-time planner then resolves real conflicts. Heuristic allocation — no global-optimality claim.
+          space-time planner then resolves real conflicts. Heuristic allocation - no global-optimality claim.
         </p>
       </div>
     </>
@@ -762,7 +762,7 @@ function BottomBar() {
               </div>
               <div className="kpis">
                 <Kpi icon={<IconCheck />} label="Jobs completed" value={`${snap.metrics.delivered} / ${snap.metrics.selected || store.selectedTaskIds.size}`} tone="green" />
-                <Kpi icon={<IconClock />} label="Fleet makespan" value={snap.metrics.actualMakespanTicks !== null ? formatClock(snap.metrics.actualMakespanTicks) : (snap.metrics.plannedMakespanTicks !== null ? `est ${formatClock(snap.metrics.plannedMakespanTicks)}` : '—')} tone="amber" />
+                <Kpi icon={<IconClock />} label="Fleet makespan" value={snap.metrics.actualMakespanTicks !== null ? formatClock(snap.metrics.actualMakespanTicks) : (snap.metrics.plannedMakespanTicks !== null ? `est ${formatClock(snap.metrics.plannedMakespanTicks)}` : '-')} tone="amber" />
                 <Kpi icon={<IconRoute />} label="Distance travelled" value={`${snap.metrics.distanceMeters.toFixed(1)} m`} tone="cyan" />
                 <Kpi icon={<IconShield />} label="Conflicts avoided" value={String(snap.metrics.conflictsAvoided)} tone="amber" />
               </div>
@@ -802,10 +802,10 @@ function LandingPage({ leaving = false }: { leaving?: boolean }) {
   const [showTech, setShowTech] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const presetDescriptions: Record<string, string> = {
-    ecommerce: 'Dense carton aisles with receiving, packing and shipping docks — the classic fulfillment floor.',
+    ecommerce: 'Dense carton aisles with receiving, packing and shipping docks - the classic fulfillment floor.',
     steel: 'Wide aisles, coils and beams in a heavy-goods depot with long horizontal bays.',
     construction: 'Pallets, bags and timber across mixed-material zones and a guarded restricted strip.',
-    crossdock: 'Sorting racks, staging lanes and a dispatch wall — flow from receiving straight out.',
+    crossdock: 'Sorting racks, staging lanes and a dispatch wall - flow from receiving straight out.',
   };
 
   // Scroll reveal: sections fade up once. Armed only after mount, so content is never hidden without JS.
@@ -859,7 +859,7 @@ function LandingPage({ leaving = false }: { leaving?: boolean }) {
           <p className="lp-lede">
             RoboArena shows how a robot fleet thinks. Pick orders from a real warehouse, dispatch
             Scout and Hauler robots, and watch a planning algorithm assign every task, route through
-            aisles, wait its turn and deliver — then edit the building and watch the plan adapt.
+            aisles, wait its turn and deliver - then edit the building and watch the plan adapt.
           </p>
           <div className="lp-hero-actions">
             <div className="lp-ctas">
@@ -886,7 +886,7 @@ function LandingPage({ leaving = false }: { leaving?: boolean }) {
             </div>
           </div>
           <figcaption className="lp-hero-caption">
-            One plan, two robots, zero collisions — routes are computed through real aisles and
+            One plan, two robots, zero collisions - routes are computed through real aisles and
             reserved second by second. <button className="lp-link" onClick={() => { store.setMode('simulate'); store.startGuidedDemo(); }}>See it run</button>
           </figcaption>
         </figure>
@@ -901,7 +901,7 @@ function LandingPage({ leaving = false }: { leaving?: boolean }) {
               ['Assign', 'Choose orders and a Scout/Hauler fleet that fits the job.'],
               ['Plan', 'Compare two assignment strategies before anything moves.'],
               ['Simulate', 'Watch picks, waits, deliveries and returns tick by tick.'],
-              ['Analyze', 'Makespan, distance, waits — export the run as JSON/CSV.'],
+              ['Analyze', 'Makespan, distance, waits - export the run as JSON/CSV.'],
             ].map(([t, d], i) => (
               <li key={t} className="lp-step">
                 <span className="lp-step-n">{String(i + 1).padStart(2, '0')}</span>
@@ -943,12 +943,12 @@ function LandingPage({ leaving = false }: { leaving?: boolean }) {
           <ul className="lp-observations">
             <li>
               <b>Assignment has reasons.</b> The Hauler takes multi-stop trips while the Scout runs
-              singles — the planner tests each option against the predicted finish time and shows its
+              singles - the planner tests each option against the predicted finish time and shows its
               reasoning per robot.
             </li>
             <li>
               <b>Waiting is part of the design.</b> When two routes would cross, a robot holds
-              position — reservations, not collisions. Amber pause markers appear on the route.
+              position - reservations, not collisions. Amber pause markers appear on the route.
             </li>
             <li>
               <b>Replays are exact.</b> Reset and rerun the same mission: every pickup, wait and
@@ -959,7 +959,7 @@ function LandingPage({ leaving = false }: { leaving?: boolean }) {
         <div className="lp-notes-col lp-notes-limit t-dark reveal">
           <div className="lp-section-label"><i>04</i> Honest limits</div>
           <p>
-            Both planners are fast heuristics — not proven optimal. The reservation planner can
+            Both planners are fast heuristics - not proven optimal. The reservation planner can
             report a genuine failure in tight congestion rather than fake a route. Nothing here
             controls real robots; all data is simulated.{' '}
             <button className="lp-link" onClick={() => { store.learnOpen = true; store.notify(); }}>
@@ -983,8 +983,7 @@ function LandingPage({ leaving = false }: { leaving?: boolean }) {
       <footer className="lp-footer t-dark">
         <div className="lp-wrap lp-footer-in">
           <span>
-            An educational/professional simulation by a fictional industrial-simulation company.
-            Results are synthetic — no real factory data.
+            A simulation project by Ayush Khanal. Results are synthetic, not real factory data.
           </span>
           <button className="lp-link" onClick={() => store.setMode('design')}>Open the studio →</button>
         </div>
@@ -1027,7 +1026,7 @@ function GuidedOverlay() {
         </button>
       </div>
       {finished && step === GUIDED_STAGES.length - 1 && (
-        <div className="guided-done"><IconCheck /> Mission complete — explore Analyze for the full breakdown.</div>
+        <div className="guided-done"><IconCheck /> Mission complete - explore Analyze for the full breakdown.</div>
       )}
     </div>
   );
@@ -1067,13 +1066,13 @@ function LearnA({ level }: { level: 'simple' | 'engineering' }) {
         <p>
           Robots can only drive down aisles, never through shelves. A* is the map app of the
           warehouse: it explores outward from the robot and always expands the most promising
-          direction first, so it finds the <b>shortest aisle route</b> quickly — and if a shelf
+          direction first, so it finds the <b>shortest aisle route</b> quickly - and if a shelf
           blocks the way, it walks around.
         </p>
       ) : (
         <p>
           A* on the 4-connected grid with a Manhattan heuristic (admissible and consistent for
-          unit-cost orthogonal moves). Distances are computed through aisles — straight-line
+          unit-cost orthogonal moves). Distances are computed through aisles - straight-line
           guesses are never used. Unreachable goals return an explicit failure, and BFS distance
           fields (uniform-cost) power the allocator's pairwise estimates; fields are cached per
           map revision and invalidated on edits.
@@ -1090,7 +1089,7 @@ function LearnB({ level }: { level: 'simple' | 'engineering' }) {
       {level === 'simple' ? (
         <p>
           A <b>Scout</b> carries one package per trip; a <b>Hauler</b> carries up to ten. Giving
-          every robot the same number of packages would be silly — the Hauler should take big
+          every robot the same number of packages would be silly - the Hauler should take big
           batches, the Scout should take nearby singles. RoboArena tests "what happens to the
           total finish time if I give <i>this</i> package to <i>that</i> robot" for every option
           and keeps the best one. That's why one robot sometimes stays idle: giving it work would
@@ -1098,9 +1097,9 @@ function LearnB({ level }: { level: 'simple' | 'engineering' }) {
         </p>
       ) : (
         <p>
-          Greedy cheapest-insertion with makespan bidding (V1 heuristic — not a proven optimum).
+          Greedy cheapest-insertion with makespan bidding (V1 heuristic - not a proven optimum).
           Tasks are processed in stable id order; each is inserted into every feasible
-          (robot, trip, position) — including opening a new trip — and scored by the resulting
+          (robot, trip, position) - including opening a new trip - and scored by the resulting
           estimated fleet makespan using BFS distance fields plus pickup/unload dwell terms.
           Deterministic tie-breaking; bounded 2-opt improves intra-trip order. Capacity is
           enforced per trip at all times; dock-to-dock trips are unlimited.
@@ -1117,18 +1116,18 @@ function LearnC({ level }: { level: 'simple' | 'engineering' }) {
       {level === 'simple' ? (
         <p>
           Before anyone moves, every robot books the floor tiles it will occupy, second by second
-          — like booking meeting rooms. If two robots would need the same aisle cell at the same
+          - like booking meeting rooms. If two robots would need the same aisle cell at the same
           moment, one of them <b>waits</b> (you'll see the amber ring). Head-on meetings are
           impossible by construction; robots never pass through each other or through shelves.
         </p>
       ) : (
         <p>
           Prioritized space-time A* with a reservation table over (cell, tick) vertices and
-          (directed edge, tick) — the reverse-edge check blocks head-on swaps. Waits are first-class
+          (directed edge, tick) - the reverse-edge check blocks head-on swaps. Waits are first-class
           actions; dwells (pickup/unload) are range-reserved; idle robots and finished robots are
           reserved for the remaining horizon. Priority orders retry in a bounded deterministic
           sequence; unresolved robots are reported as <i>planning failed</i> rather than silently
-          overlapping. Prioritized planning is incomplete — a solvable instance may still fail,
+          overlapping. Prioritized planning is incomplete - a solvable instance may still fail,
           and that is reported honestly.
         </p>
       )}

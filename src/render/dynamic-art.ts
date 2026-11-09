@@ -1,5 +1,5 @@
 // Dynamic art: robot sprites, package markers, route overlays. Rebuilt/updated per frame or
-// per plan change — kept separate from the cached static layer.
+// per plan change - kept separate from the cached static layer.
 import { Container, Graphics, Text } from 'pixi.js';
 import { MAP, FONT } from './palette';
 import { drawStorageItem } from './static-art';
@@ -8,7 +8,7 @@ import { CELL_PX } from '../engine/constants';
 import { xOf, yOf } from '../engine/grid';
 
 // Color identity by CLASS: S1 = cyan/teal family, H10 = amber family. Per-robot variation
-// comes from shade shifts within the family, plus ID badges — not ten unrelated rainbow colors.
+// comes from shade shifts within the family, plus ID badges - not ten unrelated rainbow colors.
 export function robotColor(id: string, type?: 'S1' | 'H10'): number {
   const n = Math.max(0, (parseInt(id.replace(/\D/g, ''), 10) || 1) - 1);
   const family = (type ?? detectType(id)) === 'H10' ? MAP.h10Family : MAP.s1Family;
@@ -36,7 +36,7 @@ export function buildRobotSprite(view: RobotView): Container {
   body.label = 'body';
   const g = new Graphics();
   const w = isH10 ? 32 : 23; // chassis width (x)
-  const h = isH10 ? 27 : 19; // chassis length (y) — faces up (dir 0) by default
+  const h = isH10 ? 27 : 19; // chassis length (y) - faces up (dir 0) by default
 
   // wheels: dark tires with lighter hubs, 3 per side for H10, 2 for S1
   const wheelCount = isH10 ? 3 : 2;
@@ -80,12 +80,12 @@ export function buildRobotSprite(view: RobotView): Container {
   body.addChild(g);
   c.addChild(body);
 
-  // cargo stack — added by updateRobotCargo
+  // cargo stack - added by updateRobotCargo
   const cargoHolder = new Container();
   cargoHolder.label = 'cargo';
   c.addChild(cargoHolder);
 
-  // status ring (pickup progress / waiting pulse) — hidden by default
+  // status ring (pickup progress / waiting pulse) - hidden by default
   const ring = new Graphics();
   ring.label = 'ring';
   c.addChild(ring);

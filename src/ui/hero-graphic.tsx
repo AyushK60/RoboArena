@@ -1,4 +1,4 @@
-// Landing hero: an original, animated SVG plan sheet of a warehouse operation — racks, pick
+// Landing hero: an original, animated SVG plan sheet of a warehouse operation - racks, pick
 // nodes, two planned routes and a Scout and a Hauler travelling them. Pure presentation (no
 // simulation data). All colour comes from CSS tokens (.hg-* in global.css) and the frame is
 // a .t-dark scope; animations are slow and disabled under prefers-reduced-motion.
@@ -38,7 +38,7 @@ export function HeroGraphic() {
           )),
         )}
 
-        {/* pick nodes — pulse in sequence */}
+        {/* pick nodes - pulse in sequence */}
         {[
           { x: 680, y: 124, b: false },
           { x: 410, y: 216, b: false },
