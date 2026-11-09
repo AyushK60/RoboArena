@@ -1,0 +1,11 @@
+node_modules
+dist
+.logs
+*.local
+test-results/
+playwright-report/
+.probe/
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

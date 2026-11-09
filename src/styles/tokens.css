@@ -1,0 +1,213 @@
+/* RoboArena — design tokens ("Plan Sheet").
+   Colour ratio 60 / 35 / 5:
+     60  paper cream (landing) or deep navy-ink (studio) — the field
+     35  the opposite pole: navy ink on paper, cream ink on navy — text, frames, panels
+      5  signal vermilion — the one highlight: primary action, one italic word, one route
+   Studio = dark (default). Landing (.lp) = light. .t-dark re-applies the dark set to any block. */
+
+/* ---- Studio, dark: warm graphite (default) ---- */
+:root,
+[data-theme='dark'] {
+  --bg: #0f1114;
+  --surface: #15181c;
+  --surface-2: #1c2025;
+  --surface-3: #252a31;
+  --line: #232830;
+  --line-2: #343b45;
+  --canvas-bg: #0b0d0f;
+  --overlay: rgb(15 17 19 / 0.92);
+
+  --ink: #efeae0;
+  --ink-2: #a9adb4;
+  --ink-3: #858a93;
+
+  --accent: #ff6b3d;
+  --accent-hover: #ff8560;
+  --accent-ink: #0f1114;
+  --accent-soft: rgb(255 107 61 / 0.12);
+  --accent-line: rgb(255 107 61 / 0.55);
+  --focus: #ff8560;
+
+  --ok: #34d399;
+  --warn: #f5a623;
+  --err: #f87171;
+  --info: #22d3ee;
+  --route: #22d3ee;
+  --teal: #2dd4bf;
+  --blue: #5b8def;
+  --ok-soft: rgb(52 211 153 / 0.1);
+  --warn-soft: rgb(245 166 35 / 0.1);
+  --err-soft: rgb(248 113 113 / 0.1);
+
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.5);
+  --shadow-2: 0 8px 24px -8px rgb(0 0 0 / 0.6);
+  --shadow-3: 0 24px 60px -20px rgb(0 0 0 / 0.8);
+  --scrim: rgb(6 8 10 / 0.72);
+}
+
+/* ---- Studio, light: paper plan ---- */
+[data-theme='light'] {
+  --bg: #f1ece1;
+  --surface: #f8f5ee;
+  --surface-2: #ebe6d9;
+  --surface-3: #ddd6c5;
+  --line: #d9d2c1;
+  --line-2: #b5ad9a;
+  --canvas-bg: #e2dccd;
+  --overlay: rgb(248 245 238 / 0.94);
+
+  --ink: #0e2035;
+  --ink-2: #44546a;
+  --ink-3: #5b697e;
+
+  --accent: #d4421c;
+  --accent-hover: #b93514;
+  --accent-ink: #ffffff;
+  --accent-soft: rgb(212 66 28 / 0.1);
+  --accent-line: #d4421c;
+  --focus: #0e2035;
+
+  --ok: #1f7a52;
+  --warn: #8a5a10;
+  --err: #a63a2e;
+  --info: #2f5f7a;
+  --route: #0e7490;
+  --teal: #0f766e;
+  --blue: #2f5fb3;
+  --ok-soft: rgb(31 122 82 / 0.1);
+  --warn-soft: rgb(184 122 18 / 0.12);
+  --err-soft: rgb(166 58 46 / 0.1);
+
+  --shadow-1: 0 1px 2px rgb(14 32 53 / 0.06);
+  --shadow-2: 0 8px 24px -8px rgb(14 32 53 / 0.16);
+  --shadow-3: 0 24px 60px -20px rgb(14 32 53 / 0.35);
+  --scrim: rgb(14 32 53 / 0.45);
+}
+
+/* ---- Navy blocks inside the landing (plan-sheet frame, limits panel, footer) ---- */
+.t-dark {
+  /* Surfaces: navy ink */
+  --bg: #0b1624;
+  --surface: #101e31;
+  --surface-2: #162840;
+  --surface-3: #1d3452;
+  --line: #1d3049;
+  --line-2: #2d4562;
+  --canvas-bg: #08111c;
+
+  /* Ink: cream */
+  --ink: #efeae0;
+  --ink-2: #a8b4c6;
+  --ink-3: #8392a9;
+
+  /* The 5%: signal vermilion */
+  --accent: #ff6b3d;
+  --accent-hover: #ff8560;
+  --accent-ink: #0b1624;
+  --accent-soft: rgb(255 107 61 / 0.12);
+  --accent-line: rgb(255 107 61 / 0.55);
+  --focus: #ff8560;
+
+  /* Functional state colours — shared with the canvas art, never restyled */
+  --ok: #34d399;
+  --warn: #f5a623;
+  --err: #f87171;
+  --info: #22d3ee;
+  --route: #22d3ee;
+  --teal: #2dd4bf;
+  --blue: #5b8def;
+  --ok-soft: rgb(52 211 153 / 0.1);
+  --warn-soft: rgb(245 166 35 / 0.1);
+  --err-soft: rgb(248 113 113 / 0.1);
+
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.5);
+  --shadow-2: 0 8px 24px -8px rgb(0 0 0 / 0.6);
+  --shadow-3: 0 24px 60px -20px rgb(0 0 0 / 0.8);
+  --scrim: rgb(5 10 18 / 0.72);
+  --overlay: rgb(11 22 36 / 0.92);
+}
+
+/* Landing: light "plan sheet" paper */
+.lp {
+  --bg: #f1ece1;
+  --surface: #f8f5ee;
+  --surface-2: #e8e2d4;
+  --surface-3: #ddd6c5;
+  --line: #d9d2c1;
+  --line-2: #b5ad9a;
+  --ink: #0e2035;
+  --ink-2: #44546a;
+  --ink-3: #5b697e;
+  --accent: #d4421c;
+  --accent-hover: #b93514;
+  --accent-ink: #ffffff;
+  --accent-soft: rgb(212 66 28 / 0.1);
+  --accent-line: #d4421c;
+  --focus: #0e2035;
+  --ok: #2f6b4a;
+  --warn: #8a5a10;
+  --err: #a63a2e;
+  --info: #2f5f7a;
+  --shadow-1: 0 1px 2px rgb(14 32 53 / 0.06);
+  --shadow-2: 0 8px 24px -8px rgb(14 32 53 / 0.16);
+  --shadow-3: 0 30px 60px -30px rgb(14 32 53 / 0.5);
+}
+
+:root {
+  /* Type */
+  --font-display: 'Newsreader', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  --font-body: 'Geist', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono', 'Cascadia Code', Consolas, ui-monospace, monospace;
+
+  --fs-xs: 0.6875rem;
+  --fs-sm: 0.78125rem;
+  --fs-md: 0.8125rem; /* 13px: studio body */
+  --fs-base: 1rem;
+  --fs-lg: 1.1875rem;
+  --fs-xl: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  --fs-2xl: clamp(2rem, 1.4rem + 2.2vw, 3.25rem);
+  --fs-3xl: clamp(2.75rem, 1rem + 6vw, 5.5rem);
+  --lh-tight: 0.98;
+  --lh-snug: 1.2;
+  --lh-body: 1.6;
+  --tracking-display: -0.035em;
+  --tracking-caps: 0.12em;
+
+  /* Space (4/8 grid) */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4.5rem;
+  --s-9: 7rem;
+
+  /* Shape */
+  --r-sm: 4px;
+  --r-md: 6px;
+  --r-lg: 10px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --d-fast: 150ms;
+  --d-base: 240ms;
+  --d-slow: 700ms;
+
+  --container: 1240px;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --topbar-h: 52px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

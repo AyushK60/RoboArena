@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      // apply the saved studio theme before first paint (dark by default)
+      try {
+        var t = localStorage.getItem('roboarena-theme');
+        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+        document.documentElement.style.colorScheme = document.documentElement.dataset.theme;
+      } catch (e) {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0B1624" />
+    <meta name="description" content="Plan, simulate and compare warehouse robot fleets. Deterministic, local-first, honestly labeled heuristics." />
+    <meta property="og:title" content="RoboArena — Warehouse Robotics Simulation Studio" />
+    <meta property="og:description" content="Plan, simulate and compare warehouse robot fleets with a deterministic A* and space-time reservation engine." />
+    <meta property="og:type" content="website" />
+    <title>RoboArena — Warehouse Robotics Simulation Studio</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Crect width='26' height='26' rx='5' fill='%230E2035'/%3E%3Crect x='6.5' y='10' width='13' height='8.5' rx='1.8' fill='none' stroke='%23EFEAE0' stroke-width='1.7'/%3E%3Cpath d='M13 7v3' stroke='%23EFEAE0' stroke-width='1.7'/%3E%3Ccircle cx='13' cy='5.6' r='1.9' fill='%23FF6B3D'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
